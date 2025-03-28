@@ -40,15 +40,19 @@ public class App {
 
         wordleDatabaseConnection.createNewDatabase("words.db");
         if (wordleDatabaseConnection.checkIfConnectionDefined()) {
-            System.out.println("Wordle created and connected.");
+            //System.out.println("Wordle created and connected.");
+            logger.log(Level.INFO, "Wordle created and connected.");
         } else {
-            System.out.println("Not able to connect. Sorry!");
+            //System.out.println("Not able to connect. Sorry!");
+            logger.log(Level.INFO, "Not able to connect. Sorry!");
             return;
         }
         if (wordleDatabaseConnection.createWordleTables()) {
-            System.out.println("Wordle structures in place.");
+            //System.out.println("Wordle structures in place.");
+            logger.log(Level.INFO, "Wordle structure in place.");
         } else {
-            System.out.println("Not able to launch. Sorry!");
+            //System.out.println("Not able to launch. Sorry!");
+            logger.log(Level.INFO, "Not able to launch. Sorry!");
             return;
         }
 
@@ -59,12 +63,14 @@ public class App {
             int i = 1;
             while ((line = br.readLine()) != null) {
                 if (line.matches("^[a-z]{4}$")) {
-                    System.out.println(line);
+                    //System.out.println(line);
+                    logger.log(Level.INFO, line);
                     wordleDatabaseConnection.addValidWord(i, line);
-                    i++;
                 } else {
-                    System.out.println(line + " is no a valid word");
+                    logger.log(Level.WARNING, line + " is an invalid word");
+                    //System.out.println(line + " is no a valid word");
                 }
+                i++;
               
             }
 
